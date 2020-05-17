@@ -235,9 +235,15 @@ handle_info(InfoMessage, State) ->
 
 
 %% @hidden
-terminate(_Reason, #state{socket=nil}) ->
+terminate(Reason, #state{socket=nil}) ->
+        error_logger:error_report([
+                                       {error, Reason}
+                                      ]),
     ok;
-terminate(_Reason, #state{socket=Socket}) ->
+terminate(Reason, #state{socket=Socket}) ->
+    error_logger:error_report([
+                                       {error, Reason}
+                                      ]),
     gen_tcp:close(Socket),
     ok.
 
