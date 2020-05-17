@@ -227,7 +227,8 @@ handle_info({tcp_closed, _Port}, #state{host=nil}=State) ->
 %     try_connect(State);
 
 handle_info({tcp_closed, _Port}, State) ->
-    close(self());
+    {stop, {shutdown, tcp_closed}, State};
+    % close(self());
     % exit(normal);
 
 handle_info(InfoMessage, State) ->
