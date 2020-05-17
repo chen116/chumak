@@ -227,7 +227,7 @@ handle_info({tcp_closed, _Port}, #state{host=nil}=State) ->
 %     try_connect(State);
 
 handle_info({tcp_closed, _Port}, State) ->
-    close(State);
+    terminate("it dieded",State);
 
 handle_info(InfoMessage, State) ->
     error_logger:info_report([
