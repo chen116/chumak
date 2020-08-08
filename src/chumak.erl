@@ -11,7 +11,7 @@
 -behaviour(application).
 
 -export([start/2, stop/1]).
--export([socket/1, socket/2, connect/4, connect/5, bind/4, send/2, recv/1, send_multipart/2, recv_multipart/1,
+-export([socket/1, socket/2, connect/4, connect/5, bind/4, send/2, recv/1, send_multipart/2, send_multipart/3, recv_multipart/1,
          unblock/1,
          set_socket_option/3,
          cancel/2, subscribe/2,
@@ -154,6 +154,13 @@ send_multipart(SocketPid, Multipart)
        is_list(Multipart) ->
 
     gen_server:call(SocketPid, {send_multipart, Multipart}, infinity).
+
+-spec send_multipart(SocketPid::pid(), [Data::binary()], Timeout::integer()) -> ok.
+send_multipart(SocketPid, Multipart,Timeout)
+  when is_pid(SocketPid),
+       is_list(Multipart) ->
+
+    gen_server:call(SocketPid, {send_multipart, Multipart}, Timeout).
 
 %% @doc recv a message for peers
 -spec recv(SocketPid::pid()) -> {ok, Data::binary()} | {error, Reason::atom()}.
