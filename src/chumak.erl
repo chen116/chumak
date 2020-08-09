@@ -155,12 +155,13 @@ send_multipart(SocketPid, Multipart)
 
     gen_server:call(SocketPid, {send_multipart, Multipart}, infinity).
 
--spec send_multipart(SocketPid::pid(), [Data::binary()], Timeout::integer()) -> ok.
+%% edgesys
+-spec send_multipart(SocketPid::pid(), [Data::binary()], Timeout::integer()) -> ok. 
 send_multipart(SocketPid, Multipart,Timeout)
   when is_pid(SocketPid),
        is_list(Multipart) ->
 
-    gen_server:call(SocketPid, {send_multipart, Multipart}, Timeout).
+    gen_server:call(SocketPid, {send_multipart, Multipart}, Timeout+1000).
 
 %% @doc recv a message for peers
 -spec recv(SocketPid::pid()) -> {ok, Data::binary()} | {error, Reason::atom()}.

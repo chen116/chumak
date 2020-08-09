@@ -11,7 +11,7 @@
 -behaviour(gen_server).
 
 %% protocol behaviors
--export([accept/3, accept/2, connect/4, connect/5, connect/6, send/2, send/3, send_error/2,
+-export([accept/3, accept/2, connect/4, connect/5, connect/6, send/2, send/3,  send_error/2,
          send_subscription/2, send_cancel_subscription/2,
          incoming_queue_out/1, reconnect/1, close/1]).
 %% gen_server behaviors
